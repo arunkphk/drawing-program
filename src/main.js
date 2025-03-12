@@ -2,6 +2,7 @@ import { createInterface } from "readline";
 import Canvas from "./canvas.js";
 import CommandFactory from "./commandFactory.js";
 
+// Create a Readline interface to handle user input/output in the terminal
 const rl = createInterface({
     input: process.stdin,
     output: process.stdout,
@@ -59,7 +60,6 @@ function processInput(input) {
             if (!validateNumericParams(params, [0, 1], command, description)) {
                 return;
             }
-            // The third parameter (color) is intentionally left unchecked
         }
 
         // Check if a canvas is required but not yet created
@@ -74,7 +74,7 @@ function processInput(input) {
 
         const result = cmd.execute();
         if (result instanceof Canvas) {
-            canvas = result; // Set the canvas if created
+            canvas = result;
         }
 
         // Render the canvas after each successful command
@@ -93,4 +93,5 @@ rl.on("line", (input) => {
     console.log("Program terminated.");
 });
 
+// Export the processInput function for testing purposes
 export { processInput };

@@ -1,5 +1,6 @@
 class Canvas {
     constructor(width, height) {
+        // Initialize canvas dimensions and create a grid filled with blank spaces
         this.width = parseInt(width);
         this.height = parseInt(height);
         this.grid = Array(this.height)
@@ -8,6 +9,7 @@ class Canvas {
     }
 
     validateCoordinates(x, y) {
+        // Ensure that the given coordinates are within canvas bounds
         return x >= 0 && x < this.width && y >= 0 && y < this.height;
     }
 
@@ -18,10 +20,12 @@ class Canvas {
         }
 
         if (x1 === x2) {
+            // Vertical line
             for (let y = Math.min(y1, y2); y <= Math.max(y1, y2); y++) {
                 this.grid[y][x1] = "x";
             }
         } else if (y1 === y2) {
+            // Horizontal line
             for (let x = Math.min(x1, x2); x <= Math.max(x1, x2); x++) {
                 this.grid[y1][x] = "x";
             }
@@ -31,6 +35,7 @@ class Canvas {
     }
 
     drawRectangle(x1, y1, x2, y2) {
+        // Draw a rectangle by combining four lines
         if (!this.validateCoordinates(x1, y1) || !this.validateCoordinates(x2, y2)) {
             console.log(`Error: Rectangle corners (${x1}, ${y1}) and (${x2}, ${y2}) are out of canvas bounds.`);
             return;
@@ -42,19 +47,17 @@ class Canvas {
     }
 
     bucketFill(x, y, color) {
-        x = parseInt(x);
-        y = parseInt(y);
+        // Fill a region connected to the given coordinates with the specified color
+        const targetColor = this.grid[y][x];
         if (!this.validateCoordinates(x, y)) {
             console.log(`Error: Starting point (${x}, ${y}) is out of canvas bounds.`);
             return;
         }
-
-        const targetColor = this.grid[y][x];
         if (targetColor === color || targetColor === "x") return;
 
+        // Recursive function to fill connected cells
         const fill = (x, y) => {
             if (!this.validateCoordinates(x, y) || this.grid[y][x] !== targetColor) return;
-
             this.grid[y][x] = color;
             fill(x + 1, y);
             fill(x - 1, y);

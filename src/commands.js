@@ -1,6 +1,7 @@
 import Canvas from "./canvas.js";
 
 class Command {
+    // Abstract class for all commands
     execute() {
         throw "Execute method not implemented!";
     }
