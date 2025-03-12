@@ -48,16 +48,19 @@ class Canvas {
 
     bucketFill(x, y, color) {
         // Fill a region connected to the given coordinates with the specified color
-        const targetColor = this.grid[y][x];
+        x = parseInt(x);
+        y = parseInt(y);
         if (!this.validateCoordinates(x, y)) {
             console.log(`Error: Starting point (${x}, ${y}) is out of canvas bounds.`);
             return;
         }
+
+        const targetColor = this.grid[y][x];
         if (targetColor === color || targetColor === "x") return;
 
-        // Recursive function to fill connected cells
         const fill = (x, y) => {
             if (!this.validateCoordinates(x, y) || this.grid[y][x] !== targetColor) return;
+
             this.grid[y][x] = color;
             fill(x + 1, y);
             fill(x - 1, y);
