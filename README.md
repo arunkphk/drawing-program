@@ -43,3 +43,12 @@ Modules: Node.js
 
 Patterns: Command Factory Pattern, Object-Oriented Programming (OOP)
 
+# Scope and Limitations 
+
+All the requirements mentioned in the task are implemented 
+
+Diagonal lines are excluded as per the task scope simplifying rendering logic
+
+Dynamic terminal resizing compatibility has not been implemented and can mark as an enhancement to improve user experience
+
+
